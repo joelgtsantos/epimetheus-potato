@@ -1,1 +1,33 @@
-<p>new-item works!</p>
+<mat-card>
+  <mat-card-title>
+    Add item
+  </mat-card-title>
+  <section class="new-item-form">
+    <form fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" #f="ngForm" (ngSubmit)="onSubmit(f)">
+      <mat-form-field>
+        <input
+          type="text"
+          matInput
+          placeholder="Name of Item"
+          ngModel
+          name="name"
+          required
+          #nameInput="ngModel">
+        <mat-error *ngIf="nameInput.hasError('required')">Field must not be empty.</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          type="number"
+          matInput
+          placeholder="Stock of Item"
+          ngModel
+          name="stock"
+          required
+          MIN=0
+          #stockInput="ngModel">
+        <mat-error>Enter a valid number of items</mat-error>
+      </mat-form-field>
+      <button type="submit" mat-raised-button color="primary" [disabled]="f.invalid">Submit</button>
+    </form>
+  </section>
+</mat-card>
