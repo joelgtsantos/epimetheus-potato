@@ -7,19 +7,43 @@
 
   
   <ng-container matColumnDef="name">
-    <mat-header-cell *matHeaderCellDef>State</mat-header-cell>
-    <mat-cell *matCellDef="let element">{{ element.name }}</mat-cell>
+    <mat-header-cell *matHeaderCellDef>Item name</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{ element.name }} <span class="out-of-stock" *ngIf="element.stock == 0">out of stock</span></mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="stock">
     <mat-header-cell *matHeaderCellDef>Stock</mat-header-cell>
-    <mat-cell *matCellDef="let element">{{ element.stock | number }}</mat-cell>
+    <mat-cell *matCellDef="let element; let rowIdx = index;">
+      <mat-form-field>
+      <input
+        type="number"
+        min="0"
+        matInput 
+        #stock="ngModel" 
+        name="stock{{rowIdx}}" 
+        [(ngModel)]="element.stock"  
+      required>  
+    </mat-form-field></mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="lastUpdatedDate">
     <mat-header-cell *matHeaderCellDef>Last Updated Date</mat-header-cell>
     <mat-cell *matCellDef="let element">{{ element.lastUpdatedDate | date }}</mat-cell>
   </ng-container>
+
+  <ng-container  matColumnDef="customActions">
+    <mat-header-cell *matHeaderCellDef>Custom actions</mat-header-cell>
+    <mat-cell *matCellDef="let element; let rowIdx = index;">
+      <button (click)="saveItem(element.id, element.stock)">
+          <mat-icon>done_all</mat-icon>
+        </button>
+        
+        <button (click)="deleteItem(element.id)" class="custom-actions">
+          <mat-icon>delete</mat-icon>
+        </button>
+    </mat-cell>
+  </ng-container>
+
 
 
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

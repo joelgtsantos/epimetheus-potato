@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { InventoryService } from '../inventory.service';
@@ -11,6 +11,7 @@ import * as fromRoot from '../../app.reducer';
   styleUrls: ['./new-item.component.css']
 })
 export class NewItemComponent implements OnInit {
+  @Output() next = new EventEmitter<void>();
 
   constructor(
     private inventoryService: InventoryService,
@@ -18,14 +19,18 @@ export class NewItemComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+
   }
 
   onSubmit(form: NgForm) {
-    
+    this.next.emit();
+
     this.inventoryService.createNewItem({
       name: form.value.name,
       stock: form.value.stock
-    })
+    });
+
+    
   }
 
 }

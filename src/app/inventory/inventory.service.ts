@@ -22,7 +22,7 @@ export class InventoryService {
   createNewItem(item: ItemData){
 
     
-    let newItem: Item = {
+    const newItem: Item = {
       id: Math.round(Math.random() * 10000).toString(),
       name: item.name,
       stock: item.stock,
@@ -36,5 +36,14 @@ export class InventoryService {
   getAllItems(){
     return this.itemList.slice();
   }
+
+  deleteItem(id: string){
+    this.store.dispatch(new Inventory.DeleteItem(id));
+  }
+
+   updateItem(id: string, stock: number){
+    this.store.dispatch(new Inventory.UpdateItem(id, stock));
+  }
+
 
 }

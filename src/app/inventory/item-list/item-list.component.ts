@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import { Item } from '../item.model';
 import { InventoryService } from '../inventory.service';
 import * as fromInventory from '../inventory.reducer';
+import { FormArray, FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-item-list',
@@ -12,7 +13,7 @@ import * as fromInventory from '../inventory.reducer';
   styleUrls: ['./item-list.component.css']
 })
 export class ItemListComponent implements OnInit {
-  displayedColumns = ['id', 'name', 'stock', 'lastUpdatedDate'];
+  displayedColumns = ['id', 'name', 'stock', 'lastUpdatedDate', 'customActions'];
   dataSource = new MatTableDataSource<Item>();
 
 
@@ -24,11 +25,20 @@ export class ItemListComponent implements OnInit {
   ngOnInit(): void {
     this.store.select(fromInventory.getAllItems).subscribe(
       (items: Item[]) => {
-        console.log("itemmssss");
+        console.log("Add new item to inventory");
         this.dataSource.data = items;
       }
     );
-    //this.trainingService.fetchCompletedOrCancelledExercises();
+  }
+
+  deleteItem(id: string): void {
+    console.log("delete item "+id)
+    this.inventoryService.deleteItem(id);
+  }
+
+  saveItem(id: string, stock: number): void {
+    console.log("update item "+id + " " + stock)
+    this.inventoryService.updateItem(id, stock);
   }
 
 }

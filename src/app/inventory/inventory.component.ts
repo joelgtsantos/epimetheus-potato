@@ -11,11 +11,16 @@ import * as fromInventory from './inventory.reducer';
   styleUrls: ['./inventory.component.css']
 })
 export class InventoryComponent implements OnInit {
-
+  selectedIndex: number = 1;
 
  constructor(private inventoryService: InventoryService, private store: Store<fromInventory.State>) {}
 
   ngOnInit(): void {
+  }
+
+  next() {
+    console.log("next " + this.selectedIndex);
+    this.selectedIndex = this.selectedIndex === 1 ? 0 : 1;
   }
 
 }

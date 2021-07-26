@@ -1,5 +1,5 @@
 import { Action, createFeatureSelector, createSelector } from '@ngrx/store';
-import { InventoryActions, ADD_ITEM, SET_INVENTORY } from './inventory.actions';
+import { InventoryActions, ADD_ITEM, SET_INVENTORY, DELETE_ITEM_INVENTORY, UPDATE_ITEM_INVENTORY } from './inventory.actions';
 import { Item } from './item.model';
 import * as fromRoot from '../app.reducer';
 
@@ -27,6 +27,25 @@ export function inventoryReducer(state: InventoryState = initialState, action: I
       return {
         ...state,
         items: [...state.items, action.newItem]
+      };
+    case DELETE_ITEM_INVENTORY:
+      return {
+        ...state,
+        items: state.items.filter(item => item.id !== action.id),
+      };
+    case UPDATE_ITEM_INVENTORY:
+      return {
+        ...state,
+        items: state.items.map(item => ({...item})).map(item => {
+          if(item.id === action.id){
+            return{
+              ...item,
+              stock: action.stock
+            }
+          }else{
+            return item;
+          }
+        })
       };
     default:{
       return state;

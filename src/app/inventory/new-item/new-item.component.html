@@ -3,7 +3,7 @@
     Add item
   </mat-card-title>
   <section class="new-item-form">
-    <form fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" #f="ngForm" (ngSubmit)="onSubmit(f)">
+    <form fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" #f="ngForm" (ngSubmit)="onSubmit(f); f.resetForm()">
       <mat-form-field>
         <input
           type="text"
@@ -23,7 +23,7 @@
           ngModel
           name="stock"
           required
-          MIN=0
+          min="0"
           #stockInput="ngModel">
         <mat-error>Enter a valid number of items</mat-error>
       </mat-form-field>
