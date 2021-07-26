@@ -26,9 +26,14 @@
     </mat-form-field></mat-cell>
   </ng-container>
 
+  <ng-container matColumnDef="createdDate">
+    <mat-header-cell *matHeaderCellDef>Created Date</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{ element.createdDate | date: 'medium' }}</mat-cell>
+  </ng-container>
+
   <ng-container matColumnDef="lastUpdatedDate">
     <mat-header-cell *matHeaderCellDef>Last Updated Date</mat-header-cell>
-    <mat-cell *matCellDef="let element">{{ element.lastUpdatedDate | date }}</mat-cell>
+    <mat-cell *matCellDef="let element">{{ element.lastUpdatedDate | date: 'medium' }}</mat-cell>
   </ng-container>
 
   <ng-container  matColumnDef="customActions">

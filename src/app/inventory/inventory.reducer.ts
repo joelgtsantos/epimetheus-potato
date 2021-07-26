@@ -40,7 +40,8 @@ export function inventoryReducer(state: InventoryState = initialState, action: I
           if(item.id === action.id){
             return{
               ...item,
-              stock: action.stock
+              stock: action.stock,
+              lastUpdatedDate: new Date()
             }
           }else{
             return item;

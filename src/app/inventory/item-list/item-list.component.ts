@@ -13,7 +13,7 @@ import { FormArray, FormGroup, FormBuilder } from '@angular/forms';
   styleUrls: ['./item-list.component.css']
 })
 export class ItemListComponent implements OnInit {
-  displayedColumns = ['id', 'name', 'stock', 'lastUpdatedDate', 'customActions'];
+  displayedColumns = ['id', 'name', 'stock', 'createdDate', 'lastUpdatedDate', 'customActions'];
   dataSource = new MatTableDataSource<Item>();
 
 
