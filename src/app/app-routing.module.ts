@@ -2,11 +2,11 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { WelcomeComponent } from './welcome/welcome.component';
-import { NewItemComponent } from './inventory/new-item/new-item.component';
+import { InventoryComponent } from './inventory/inventory.component';
 
 const routes: Routes = [
   { path: '', component: WelcomeComponent},
-  { path: 'new-item', component: NewItemComponent}
+  { path: 'inventory', component: InventoryComponent}
 ];
 
 @NgModule({
